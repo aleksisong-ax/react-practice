@@ -1,6 +1,6 @@
-export function downnloadName(name){
+export function downloadName(name){
     const text = JSON.stringify({name}, null, 2);
-    const blob = new Blob({text}, {type: "applicaiton/json"});
+    const blob = new Blob([text], {type: "application/json"});
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
 
