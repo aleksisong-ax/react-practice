@@ -1,16 +1,64 @@
-# React + Vite
+# Class Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## Backend setup
 
-Currently, two official plugins are available:
+The API requires MongoDB. Start a local MongoDB server, then create the server
+environment file by copying `server/.env.example` to `server/.env`. The example
+uses the default local MongoDB address; if your MongoDB server uses a different
+address, update `MONGODB_URI` in `server/.env`. You can also use a MongoDB Atlas
+connection string there.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+From the project directory, start the API:
 
-## React Compiler
+```powershell
+Copy-Item server/.env.example server/.env
+cd server
+node server.mjs
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Then, in a separate terminal from the project directory, start the frontend:
 
-## Expanding the Oxlint configuration
+```powershell
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Step 11: Fix common errors and save your work
+
+- **Cannot find `axios`:** run `npm install axios` from the project root (`class-demo`).
+- **Cannot find `mongoose`:** run `npm install mongoose` from `class-demo/server`.
+- **Missing `MONGODB_URI`:** check `server/.env` and start Node from `server`.
+- **Authentication failed or timeout:** check your database user, URI encoding,
+  allowed public IP, internet connection, and Atlas cluster status.
+- **400 invalid input:** provide both a name and section. Empty or whitespace-only
+  text is rejected.
+- **`EADDRINUSE`:** stop the old backend using port 3001 before restarting.
+- **Proxy error:** make sure Express is running and restart Vite after changing
+  its configuration.
+- **Blank page:** check the browser console, exact file names, imports, complete
+  code parts, and `BrowserRouter` in `main.jsx`.
+
+This is a local class demo without user authentication. Use fictional records.
+Test a live Atlas connection with your own credentials; do not paste secrets
+into screenshots or GitHub.
+
+### Optional GitHub update
+
+From the project root, review and stage your work:
+
+```powershell
+git status
+git diff
+git add src/pages/Students.jsx src/App.jsx vite.config.js
+git add package.json package-lock.json
+git add server/server.mjs server/models/Student.mjs
+git add server/routes/students.mjs server/package.json
+git add server/package-lock.json .gitignore README.md
+git status
+```
+
+If the staged changes are correct, commit and push:
+
+```powershell
+git commit -m "Add student records CRUD"
+git push
+```
